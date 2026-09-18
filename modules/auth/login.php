@@ -1,10 +1,10 @@
 <?php
-session_start();
 require_once '../../config/security.php';
 require_once '../../config/database.php';
 
-if (!isset($_SESSION['user_id'])) {
-    header('Location: /login.php');
+// Redirect if already logged in
+if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
+    header('Location: /index.php');
     exit;
 }
 

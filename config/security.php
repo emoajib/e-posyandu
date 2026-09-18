@@ -1,16 +1,14 @@
 <?php
 // Security configuration: CSRF, session, sanitization
 $is_https = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on';
-$host = $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? 'localhost';
-session_set_cookie_params([
-    'lifetime' => 3600,
-    'path' => '/',
-    'domain' => $host,
-    'secure' => $is_https,
-    'httponly' => true,
-    'samesite' => 'Strict',
-]);
 if (session_status() === PHP_SESSION_NONE) {
+    session_set_cookie_params([
+        'lifetime' => 3600,
+        'path' => '/',
+        'secure' => $is_https,
+        'httponly' => true,
+        'samesite' => 'Lax',
+    ]);
     session_start();
 }
 
